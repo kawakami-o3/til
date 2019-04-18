@@ -1,7 +1,7 @@
 
 # Convert Excel Serial Date to time.Time
 
-```
+```go
 package main
 
 import (

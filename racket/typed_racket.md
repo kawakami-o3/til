@@ -68,6 +68,13 @@ eval:2:0: Type Checker: type mismatch
 (define-type NN (-> Number Number))
 ```
 
+## Types in Typed Racket
+
+再帰型
+
+```
+(define-type BinaryTree (U Number (Pair BinaryTree BinaryTree)))
+```
 
 ## Occurrence Typing
 

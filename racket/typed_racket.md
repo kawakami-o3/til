@@ -14,5 +14,10 @@ REPLをTyped Racketモードで起動するなら
 racket -I typed/racket
 ```
 
+## こまごましたこと
+
+* 型を表示する
+  * :print-type
+
 
 

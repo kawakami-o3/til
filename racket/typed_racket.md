@@ -74,7 +74,75 @@ eval:2:0: Type Checker: type mismatch
 
 ```
 (define-type BinaryTree (U Number (Pair BinaryTree BinaryTree)))
+
+(define-type BinaryTree (U BinaryTreeLeaf BinaryTreeNode))
+(define-type BinaryTreeLeaf Number)
+(define-type BinaryTreeNode (Pair BinaryTree BinaryTree))
 ```
+
+a parameterized type
+
+```
+(struct None ())
+(struct (a) Some ([v : a]))
+ 
+(define-type (Opt a) (U None (Some a)))
+```
+
+Polymorphic Functions
+
+```
+(: list-length (All (A) (-> (Listof A) Integer)))
+(define (list-length l)
+  (if (null? l)
+      0
+      (add1 (list-length (cdr l)))))
+```
+
+
+Lexically Scoped Type Variables
+
+```
+(: my-id (All (a) (-> a a)))
+(define my-id
+  (lambda ([x : a])
+    (: helper (All (a) (-> a a)))
+    (define helper
+      (lambda ([y : a]) y))
+    (helper x)))
+```
+
+Uniform Variable-Arity Functions
+
+```
+#lang typed/racket
+(: sum (-> Number * Number))
+(define (sum . xs)
+  (if (null? xs)
+      0
+      (+ (car xs) (apply sum (cdr xs)))))
+```
+
+Non-Uniform Variable-Arity Functions
+
+```
+#lang typed/racket
+(: fold-left
+   (All (C A B ...)
+        (-> (-> C A B ... B C) C (Listof A) (Listof B) ... B
+            C)))
+(define (fold-left f i as . bss)
+  (if (or (null? as)
+          (ormap null? bss))
+      i
+      (apply fold-left
+             f
+             (apply f i (car as) (map car bss))
+             (cdr as)
+             (map cdr bss))))
+```
+
+???
 
 ## Occurrence Typing
 

@@ -32,6 +32,30 @@ racket -I typed/racket
 - : Boolean [more precisely: True]
 ```
 
+```racket
+(: x Number)
+(define x 7)
+
+(define x : Number 7)
+(define (id [z : Number]) : Number z)
+; (-> Number Number)
+
+(let ([x : Number 7])
+  (add1 x))
+(let-values ([([x : Number] [y : String]) (values 7 "hello")])
+  (+ x (string-length y)))
+  
+(lambda ([x : String] . [y : Number *]) (apply + y))
+; y is a list of Numbers
+; (-> String Number * Number)
+
+(case-lambda [() 0]
+             [([x : Number]) x])
+; (case-> (-> Number) (-> Number Number))
+
+
+```
+
 ## Occurrence Typing
 
 ## こまごましたこと

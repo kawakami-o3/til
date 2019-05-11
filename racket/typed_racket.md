@@ -32,6 +32,8 @@ racket -I typed/racket
 - : Boolean [more precisely: True]
 ```
 
+## Occurrence Typing
+
 ## こまごましたこと
 
 * 型を表示する

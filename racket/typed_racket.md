@@ -53,8 +53,19 @@ racket -I typed/racket
              [([x : Number]) x])
 ; (case-> (-> Number) (-> Number Number))
 
+(let ([#{x : Number} 7]) (add1 x))
+```
 
 ```
+> (ann "not a number" Number)
+eval:2:0: Type Checker: type mismatch
+  expected: Number
+  given: String
+  in: Number
+```
+
+
+
 
 ## Occurrence Typing
 

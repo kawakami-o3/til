@@ -64,7 +64,9 @@ eval:2:0: Type Checker: type mismatch
   in: Number
 ```
 
-
+```
+(define-type NN (-> Number Number))
+```
 
 
 ## Occurrence Typing

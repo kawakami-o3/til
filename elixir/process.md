@@ -31,12 +31,16 @@
 
 * Process.register/2
 * Agent.start\_link/1
-
-## GenServer
-
-
+* Agent.update/2
+* Agent.get/2
 
 ## etc
 
 * inspect/1
+
+# MIX AND OTP
+
+https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html
+
+
 

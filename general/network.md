@@ -12,3 +12,4 @@
 | JP=\>www.usa.gov  | 150          |
 | JP=\>www.gov.uk(fastly)  | 0.70          |
 
+https://www.sinet.ad.jp/connect_service/service/ping

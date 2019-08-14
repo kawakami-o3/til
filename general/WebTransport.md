@@ -23,5 +23,5 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
 
 * Head of Line Blocking
   * https://qiita.com/Jxck_/items/0dbdee585db3e21639a8
-  
-  
+* 詳解 HTTP/3
+  * https://http3-explained.haxx.se/ja/

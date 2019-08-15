@@ -2,10 +2,8 @@
 
 https://github.com/WICG/web-transport/blob/master/explainer.md
 
-* UDP
-  * UDP sockets lack encryption, congestion control, and a mechanism for consent to send (to prevent DDoS attacks).
-* WebSockets
-  * All messages must be sent and received in order even if they are independent and some of them are no longer needed.
+* 生UDPでは、暗号化、輻輳制御、DDoS防止機構が足りない
+* WebSocket では、必要なくなった通信についても順に送受信される必要がある(HoLB)
 
 
 ## 一連のRFC

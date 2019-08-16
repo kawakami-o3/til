@@ -37,11 +37,14 @@ https://tools.ietf.org/html/draft-vvv-webtransport-overview-00
 https://tools.ietf.org/html/draft-vvv-webtransport-http3-00
 
 
-## QuickTransport
+## QuicTransport
 
 https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
 
 
+### Quic
+
+https://tools.ietf.org/html/draft-ietf-quic-transport-16
 
 ## 関連事項
 

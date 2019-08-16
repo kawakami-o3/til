@@ -20,7 +20,7 @@ https://github.com/WICG/web-transport/blob/master/explainer.md
 * User agent
 
 
-## 一連のRFC
+## 概要
 
 https://tools.ietf.org/html/draft-vvv-webtransport-overview-00
 
@@ -31,10 +31,16 @@ https://tools.ietf.org/html/draft-vvv-webtransport-overview-00
 * prevent the clients from establishing transport sessions to the network endpoints that are not WebTransport servers.
 * a way to filter the clients that can access the servers by the origin
 
+
+## Http3Transport
+
 https://tools.ietf.org/html/draft-vvv-webtransport-http3-00
 
 
+## QuickTransport
+
 https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
+
 
 
 ## 関連事項

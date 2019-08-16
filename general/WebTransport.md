@@ -6,6 +6,20 @@ https://github.com/WICG/web-transport/blob/master/explainer.md
 * WebSocket では、必要なくなった通信についても順に送受信される必要がある(HoLB)
 
 
+## 用語
+
+* Transport
+* Transport protocol
+* Datagram
+* Stream
+* Message
+* Transport feature
+* Transport property
+* Server
+* Client
+* User agent
+
+
 ## 一連のRFC
 
 https://tools.ietf.org/html/draft-vvv-webtransport-overview-00

@@ -55,3 +55,6 @@ https://tools.ietf.org/html/draft-ietf-quic-transport-16
 
 * QUIC はじめました by V
   * https://medium.com/@voluntas/quic-%E3%81%AF%E3%81%98%E3%82%81%E3%81%BE%E3%81%97%E3%81%9F-fdf0c5654df7
+
+* QUICの話 (QUICプロトコルの簡単なまとめ)
+  * https://asnokaze.hatenablog.com/entry/2018/10/31/020215

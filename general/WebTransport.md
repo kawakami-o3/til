@@ -49,3 +49,6 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
   * https://qiita.com/Jxck_/items/0dbdee585db3e21639a8
 * 詳解 HTTP/3
   * https://http3-explained.haxx.se/ja/
+
+* QUIC はじめました by V
+  * https://medium.com/@voluntas/quic-%E3%81%AF%E3%81%98%E3%82%81%E3%81%BE%E3%81%97%E3%81%9F-fdf0c5654df7

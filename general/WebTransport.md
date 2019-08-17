@@ -44,7 +44,10 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
 
 ### Quic
 
-https://tools.ietf.org/html/draft-ietf-quic-transport-16
+* RFC
+  * https://tools.ietf.org/html/draft-ietf-quic-transport
+* Rust実装
+  * https://github.com/djc/quinn
 
 ## 関連事項
 

@@ -49,7 +49,8 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
 * Rust実装
   * https://github.com/djc/quinn
 * 現状
-  * https://docs.google.com/spreadsheets/d/1D0tW89vOoaScs3IY9RGC0UesWGAwE6xyLk0l4JtvTVg/edit#gid=161203809
+  * 実装リスト https://github.com/quicwg/base-drafts/wiki/Implementations
+  * 互換性表 https://docs.google.com/spreadsheets/d/1D0tW89vOoaScs3IY9RGC0UesWGAwE6xyLk0l4JtvTVg/edit#gid=161203809
   * ドラフトバージョンが更新されていることがある。
 * 参考
   * https://qiita.com/flano_yuki/items/251a350b4f8a31de47f5

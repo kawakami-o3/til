@@ -48,6 +48,10 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
   * https://tools.ietf.org/html/draft-ietf-quic-transport
 * Rust実装
   * https://github.com/djc/quinn
+* 参考
+  * https://qiita.com/flano_yuki/items/251a350b4f8a31de47f5
+  * https://asnokaze.hatenablog.com/entry/2017/08/13/022447
+
 
 ## 関連事項
 

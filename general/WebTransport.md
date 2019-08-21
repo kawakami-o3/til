@@ -44,6 +44,19 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
 
 ### Quic
 
+#### イントロ
+
+* ストリームの多重化
+* ストリーム、コネクション単位での流量制御
+* 低遅延のコネクション確立
+* NAT切り替わり時のコネクション復帰
+* 暗号化通信
+
+#### ストリーム
+
+
+#### メモ
+
 * RFC
   * https://tools.ietf.org/html/draft-ietf-quic-transport
 * Rust実装

@@ -86,6 +86,10 @@ Stream ID は単調増加させる。
 
 最初のクライアント起因双方向 stream は ID 0 となる。
 
+##### 2.2.  Sending and Receiving Data
+
+
+
 #### メモ
 
 * RFC

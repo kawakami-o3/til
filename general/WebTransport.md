@@ -46,13 +46,14 @@ https://tools.ietf.org/html/draft-vvv-webtransport-quic-00
 
 #### イントロ
 
-* ストリームの多重化
-* ストリーム、コネクション単位での流量制御
-* 低遅延のコネクション確立
-* NAT切り替わり時のコネクション復帰
+* stream の多重化
+* stream、connection単位での流量制御
+* 低遅延のconnection確立
+* NAT切り替わり時のconnection復帰
 * 暗号化通信
 
-#### ストリーム
+#### Stream
+
 
 
 #### メモ

@@ -66,6 +66,7 @@ Steam はエンドポイントのどちらからでも生成できて、並行�
 
 流量制御や stream の制限に従って、いくつでも stream を並行に操作でき、いくつでもデータを stream で送信できます。
 
+##### 2.1.  Stream Types and Identifiers
 
 #### メモ
 

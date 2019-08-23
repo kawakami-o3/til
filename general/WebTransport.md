@@ -68,6 +68,11 @@ Steam はエンドポイントのどちらからでも生成できて、並行�
 
 ##### 2.1.  Stream Types and Identifiers
 
+Stream ID で同定される。62 bit整数(0 ～ 2^62-1)。
+var int https://tools.ietf.org/html/draft-ietf-quic-transport-22#section-16 にエンコードされる。再利用はしてはならない。
+
+
+
 #### メモ
 
 * RFC

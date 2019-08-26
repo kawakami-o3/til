@@ -127,7 +127,44 @@ Stream IDは単調増加しなければならない(MUST)。
 
 注意：説明に便利なのでステートマシンを使うが、実装では必ずしもステートマシンでを用いる必要はない。
 
+##### 3.1.  Sending Stream States
 
+```
+
+          o
+          | Create Stream (Sending)
+          | Peer Creates Bidirectional Stream
+          v
+      +-------+
+      | Ready | Send RESET_STREAM
+      |       |-----------------------.
+      +-------+                       |
+          |                           |
+          | Send STREAM /             |
+          |      STREAM_DATA_BLOCKED  |
+          |                           |
+          | Peer Creates              |
+          |      Bidirectional Stream |
+          v                           |
+      +-------+                       |
+      | Send  | Send RESET_STREAM     |
+      |       |---------------------->|
+      +-------+                       |
+          |                           |
+          | Send STREAM + FIN         |
+          v                           v
+      +-------+                   +-------+
+      | Data  | Send RESET_STREAM | Reset |
+      | Sent  |------------------>| Sent  |
+      +-------+                   +-------+
+          |                           |
+          | Recv All ACKs             | Recv ACK
+          v                           v
+      +-------+                   +-------+
+      | Data  |                   | Reset |
+      | Recvd |                   | Recvd |
+      +-------+                   +-------+
+```
 
 
 #### メモ

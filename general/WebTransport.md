@@ -193,7 +193,7 @@ STREAM か STREAM_DATA_BLOCKED フレームの送信で、送信側の状態は 
 どの場合でも、エンドポイントは RESET_STREAM フレームを送信し、stream を "Reset Sent" 状態に移行させる。
 
 エンドポイントは最初のフレームで RESET_STREAM を送るかもしれない(MAY)。
-
+これにより、送信部分は開かれ、直ちに "Reset Sent" 状態に移行する。
 
 
 #### メモ

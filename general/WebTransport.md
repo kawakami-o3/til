@@ -196,6 +196,11 @@ STREAM か STREAM_DATA_BLOCKED フレームの送信で、送信側の状態は 
 これにより、送信部分は開かれ、直ちに "Reset Sent" 状態に移行する。
 
 
+RESET_STREAM を含むパケットが一度でも通達されたなら、送信部分は
+終状態である "Reset Recvd" 状態に移行する。
+
+
+
 #### メモ
 
 * RFC

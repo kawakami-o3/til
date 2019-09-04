@@ -314,6 +314,57 @@ Stream がリセットされたことを示すシグナルをアプリケーシ�
 
 ##### 3.4.  Bidirectional Stream States
 
+双方向 stream は送信部分と受信部分からなる。
+実装では、双方向 stream の状態を送信と受信のストリーム状態として表現するかもしれない。
+もっともシンプルなモデルとしては、"open"状態として送信部分か受信部分のどちらかが終状態でないことを表現し、
+"closed" 状態として送信部分も受信部分もどちらも終状態であることを表現できる。
+
+Table 2 はより複雑な双方向ストリームの対応表であり、HTTP/2 の劣化版である。
+これは、送信部分と受信部分の各々の状態を複合状態として示したものである。
+注意点としては、これは対応関係の一例であって、この対応関係では "closed" や "half-closed" 状態に遷移する前に、
+データ受信が確認される必要がある。
+
+
+```
+   +-----------------------+---------------------+---------------------+
+   | Sending Part          | Receiving Part      | Composite State     |
+   +-----------------------+---------------------+---------------------+
+   | No Stream/Ready       | No Stream/Recv *1   | idle                |
+   |                       |                     |                     |
+   | Ready/Send/Data Sent  | Recv/Size Known     | open                |
+   |                       |                     |                     |
+   | Ready/Send/Data Sent  | Data Recvd/Data     | half-closed         |
+   |                       | Read                | (remote)            |
+   |                       |                     |                     |
+   | Ready/Send/Data Sent  | Reset Recvd/Reset   | half-closed         |
+   |                       | Read                | (remote)            |
+   |                       |                     |                     |
+   | Data Recvd            | Recv/Size Known     | half-closed (local) |
+   |                       |                     |                     |
+   | Reset Sent/Reset      | Recv/Size Known     | half-closed (local) |
+   | Recvd                 |                     |                     |
+   |                       |                     |                     |
+   | Reset Sent/Reset      | Data Recvd/Data     | closed              |
+   | Recvd                 | Read                |                     |
+   |                       |                     |                     |
+   | Reset Sent/Reset      | Reset Recvd/Reset   | closed              |
+   | Recvd                 | Read                |                     |
+   |                       |                     |                     |
+   | Data Recvd            | Data Recvd/Data     | closed              |
+   |                       | Read                |                     |
+   |                       |                     |                     |
+   | Data Recvd            | Reset Recvd/Reset   | closed              |
+   |                       | Read                |                     |
+   +-----------------------+---------------------+---------------------+
+
+           Table 2: Possible Mapping of Stream States to HTTP/2
+
+   Note (*1):  A stream is considered "idle" if it has not yet been
+      created, or if the receiving part of the stream is in the "Recv"
+      state without yet having received any frames.
+```
+
+
 
 
 #### メモ

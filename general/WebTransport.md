@@ -293,6 +293,28 @@ RESET_STREAM の発行は抑制されるかもしれない。REST_STREAMの発�
 Stream がリセットされたことを示すシグナルをアプリケーションが受信した場合、
 受信部分は "Reset Read" 状態に移行する。これが終状態である。
 
+##### 3.3.  Permitted Frame Types
+
+送信者が送るフレームは 3 種類あり、これらが送受信者の状態に影響する。
+3 種類とは、STREAM、STREAM_DATA_BLOCKED、RESET_STREAM のことである。
+
+送信者が終状態 ("Data Recvd" か "Reset Recvd") のときは、これらのフレームを送ってはならない (MUST NOT)。
+送信者は、RESET_STREAM を送った後は STREAM や STREAM_DATA_BLOCKED フレームを送ってはならない (MUST NOT)。
+これは、終状態の "Reset Sent" 状態に入っているためである。
+受信者はどのような状態にあってもこれら 3 種類のフレームを受け取る可能性がある。
+なぜなら、パケットの配送が遅延している可能性があるためだ。
+
+受信者が送るのは、MAX_STREAM_DATA と STOP_SENDING である。
+
+受信者が MAX_STREAM_DATA を送信するのは "Recv" 状態のときだけである。
+受信者が STOP_SENDING を送信するのは、RESET_STREAM を受信していないときだけである。
+これは、"Reset Recvd" や "Reset Read" 状態ではないときである。
+ただし、すべてのデータを受信してから"Data Recvd" 状態で STOP_SENDING フレームを送るまでに若干の遅れがある。
+この遅延のため、送信者はこれらの 2 種類のフレームを受信する可能性がある。
+
+##### 3.4.  Bidirectional Stream States
+
+
 
 #### メモ
 

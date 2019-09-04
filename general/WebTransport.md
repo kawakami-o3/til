@@ -364,6 +364,9 @@ Table 2 はより複雑な双方向ストリームの対応表であり、HTTP/2
       state without yet having received any frames.
 ```
 
+##### 3.5.  Solicited State Transitions
+
+
 
 
 

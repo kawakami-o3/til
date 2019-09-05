@@ -10,3 +10,4 @@ https://youtu.be/uuX4PQXBeos?list=PLSE8ODhjZXja3hgmuwhf89qboV1kOxMx7&t=823
 * ~30,000,000 ns Network Storage
 * 1,000,000,000 ns Tape Archives
 
+http://iwiwi.hatenadiary.jp/entries/2013/02/12

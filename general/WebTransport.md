@@ -373,6 +373,7 @@ STREAM フレームは、STOP_SENDING の後に受信されたとしても、輻
 たとえ受領後に捨てられるとしてもカウントされる。
 
 STOP_SENDING フレームは、受信しているエンドポイントが RESET_STREAM フレームを送信することを要求する。
+STOP_SENDING フレームを受け取ったエンドポイントは、Ready, Send状態であればRESET_STREAM を送信しなければならない(MUST)。
 
 
 

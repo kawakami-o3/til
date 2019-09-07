@@ -373,8 +373,25 @@ STREAM フレームは、STOP_SENDING の後に受信されたとしても、輻
 たとえ受領後に捨てられるとしてもカウントされる。
 
 STOP_SENDING フレームは、受信しているエンドポイントが RESET_STREAM フレームを送信することを要求する。
-STOP_SENDING フレームを受け取ったエンドポイントは、Ready, Send状態であればRESET_STREAM を送信しなければならない(MUST)。
+STOP_SENDING フレームを受け取ったエンドポイントは、Ready, Send状態であれば再送する代わりに
+RESET_STREAM を送信しなければならない(MUST)。
 
+エンドポイントは STOP_SENDING フレームから RESET_STREAM へとエラーコードをコピーすべきである(SHOULD)。
+ただし、エンドポイントはアプリケーションエラーを使用するかもしれない(MAY)。
+STOP_SENDING フレームを送信するエンドポイントは、RESET_STREAM のエラーコードを無視するかもしれない(MAY)。
+
+STOP_SENDING フレームを "Data Sent" 状態で受け取った場合は、エンドポイントは前回の STREAM フレームの再送を中止し、
+まず RESET_STREAM フレームを送信しなければならない(MUST)。
+
+STOP_SENDING が送られるのは、相手側によってリセットされていない stream に対してのみであるべきである(SHOULD)。
+STOP_SENDING は、"Recv" や "Size Known" 状態のストリームに対してもっとも役に立つ。
+
+エンドポイントは、STOP_SENDING のパケットロスが起きた場合はもう一度 STOP_SENDING を送ることを期待されている。
+しかしながら、全ストリームデータが RESET_STREAM フレームが受信されたなら、この場合 stream は
+"Recv" や "Size Known" 以外の状態になっていて、STOP_SENDING フレームを送る必要はない。
+
+エンドポイントは、双方向 stream の送受信を停止したい場合、RESET_STREAM フレームを送信して一方を停止できる。
+また、前もって STOP_SENDING フレームを送信して反対方向の停止を促すことが出来る。
 
 
 #### メモ

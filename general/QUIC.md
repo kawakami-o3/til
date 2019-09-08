@@ -358,6 +358,11 @@ TODO
 # 5. Connections
 
 
+QUICのコネクション確立では、バージョンネゴシエーションに the cryptographic and transport handshakes を用いて、
+コネクション確立のレイテンシーを低減している。Section 7を参照。
+一度確立されると、コネクションは異なるIPやポートに引き継がれるかもしれない。Section 9参照。
+最後に、コネクションはどちらか一方から閉じられるかもしれない。Section 10参照。
+
 
 # メモ
 

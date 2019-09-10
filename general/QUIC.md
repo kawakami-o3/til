@@ -358,7 +358,8 @@ TODO
 # 5. Connections
 
 
-QUICのコネクション確立では、バージョンネゴシエーションに the cryptographic and transport handshakes を用いて、
+QUICのコネクション確立では、バージョンネゴシエーションに
+the cryptographic and transport handshakes を用いて、
 コネクション確立のレイテンシーを低減している。Section 7を参照。
 一度確立されると、コネクションは異なるIPやポートに引き継がれるかもしれない。Section 9参照。
 最後に、コネクションはどちらか一方から閉じられるかもしれない。Section 10参照。
@@ -372,6 +373,39 @@ Connection ID はエンドポイントによって独立的に選ばれる。
 
 Connection ID の最重要な機能は、低レイヤー(UDP, IP)でのアドレス変化が起きたとしても
 エンドポイントにパケットが届くことを保証することである。
+エンドポイントの connection ID 選択は、実装やデプロイの詳細に依存しており、
+その connection ID に紐づくパケットがエンドポイントに配送され、受信側に特定されることを許可する。
+
+Connection ID は、同じコネクションに対して使われている connection ID と相関を取れるような
+情報を含んではならない(MUST NOT)。
+自明な例としては、これが意味するのは同じコネクション中で同じ connection ID を
+使いまわしてはならないということである。
+
+長いヘッダーを持つパケットは、Source Connection ID と Destination Connection ID を持つ。
+これらは新しいコネクションに使用される。Section 7.2 参照。
+
+短いヘッダーを持つパケット (Section 17.3 参照) は Destination Connection ID のみを持ち、
+陽に長さを含まない。Destination Connection ID フィールドの長さはエンドポイントに
+知らされていると期待される。Connection ID によってルーティングするロードバランサを
+使用している場合、エンドポイントは connection ID に対して固定長としてロードバランサと
+合意するか、エンコード方式を合意してよい。固定部分は陽に表された長さをエンコードでき、
+connection ID の長さを変更しつつ、ロードバランサが使用し続けることができる。
+
+Version Negotiation (Section 17.2.1) パケットはクライアントによって指定された
+connection ID を通知し、クライアントへの正しいルーティングを保証しつつ、
+最初のパケットに対するレスポンスパケットを検証できる。
+
+ゼロ長の connection ID が使用される事があるのは、connection ID がルーティングに
+必要とされず、アドレスとポート部分でコネクションの特定に十分である場合である。
+相手側がゼロ長の connection ID を選んだ場合、エンドポイントはそのコネクションが
+生きている間はゼロ長 connection ID を使い続けなければならない(MUST)。
+また、よかのローカルアドレスからパケットを送ってはならない(MUST NOT)。
+
+エンドポイントが非ゼロ長の connection ID を要求した場合、相手側がエンドポイントに
+送信するパケットのために選べる connection ID を供給できるか保証される必要がある。
+これらの connection ID は NEW_CONNECTION_ID フレームを使ってエンドポイントから
+供給される。Section 19.15 参照。
+
 
 
 

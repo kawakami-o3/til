@@ -407,7 +407,15 @@ connection ID を通知し、クライアントへの正しいルーティング
 供給される。Section 19.15 参照。
 
 
+# 19. Frame Types and Formats
 
+## 19.4. RESET_STREAM Frame
+
+## 19.3. ACK Frames
+
+## 19.8. STREAM Frame
+
+## 19.13. STREAM_DATA_BLOCKED
 
 # メモ
 

@@ -519,3 +519,8 @@ middlebox の大部分が UDP 上から失われてしまう。
 
 * QUICの話 (QUICプロトコルの簡単なまとめ)
   * https://asnokaze.hatenablog.com/entry/2018/10/31/020215
+
+* n月刊ラムダノート Vol.1, No.1(2019) TCPの再送制御機構
+  * https://www.lambdanote.com/collections/n/products/nmonthly-vol-1-no-1-2019-ebook
+  
+  

@@ -7,6 +7,13 @@
 
 ### 1. Six octet minimum RUDP header for data transmissions
 
+少なくとも 6 つのオクテット。
+
+* ビットフラグ
+* ヘッダー長
+* シーケンスナンバー
+* Acknowledgment ナンバー
+* チェックサム (2 オクテット)
 
 
 ```

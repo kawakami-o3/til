@@ -124,6 +124,12 @@ Figure 2 に SYN segment の構造を示す。
     この数値は接続開始時に選ばれ、connection が生きている間は変わらない。
     これは交渉可能ではない。データを送る際は、お互いにお互いが提供した値を使用しなければならない。
 * Options Flag Field
+  * この 2 オクテットのフィールドは、options flag の集合を含み、options flag はこの connection に対して
+    望まれる付加的な機能の集合を特定する。
+    ```
+    Bit #  Bit Name  Description
+    0      not used  使われていない。常に 1 にでなければならない。
+    ```
 * Maximum Segment Size
 * REtransmission Timeout Value
 * Cumulative Ack Timeout Value

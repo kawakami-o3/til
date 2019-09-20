@@ -141,7 +141,10 @@ Figure 2 に SYN segment の構造を示す。
     3-7     Spare
     ```
 * Maximum Segment Size
-* REtransmission Timeout Value
+  * SYN を送ってきたピアが受信できるオクテットの最大数。ピアは互いに異なる値を指定する。
+    コネクション交渉中は、互いの指定された値以上のパケットを送ってはならない。
+    この数値はRUDPヘッダーのサイズも含む。これは交渉可能ではない。
+* Retransmission Timeout Value
 * Cumulative Ack Timeout Value
 * Null Segment Timeout Value
 * Transfer State Timeout Value

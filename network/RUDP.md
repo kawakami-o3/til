@@ -127,8 +127,18 @@ Figure 2 に SYN segment の構造を示す。
   * この 2 オクテットのフィールドは、options flag の集合を含み、options flag はこの connection に対して
     望まれる付加的な機能の集合を特定する。
     ```
-    Bit #  Bit Name  Description
-    0      not used  使われていない。常に 1 にでなければならない。
+    Bit #   Bit Name   Description
+    0       not used   使われていない。常に 1 にでなければならない。
+    1       CHK        Data Checksum 有効。もしこのビットが立っていたら、checksum フィールドは
+                       RUDP パケット全体(header + body)の checksum を含んでいる。交渉可能。
+    2       REUSE      このビットは an auto reset 中は立っていなければならず、前回の交渉可能
+                       パラメータが使用されるべきであるということを示している。このビットが
+                       立っているときは、SYN の後続するフィールドはゼロにされて送信されなけ
+                       ればならず、受信者は無視しなければならない。Maximum Segment Size,
+                       Retransmission Timeout Value, Cumulative Ack Timeout Value, Max
+                       Retransmissions, Max Cumulative Ack, Max Out of Sequence, and Max
+                       Auto Reset.
+    3-7     Spare
     ```
 * Maximum Segment Size
 * REtransmission Timeout Value

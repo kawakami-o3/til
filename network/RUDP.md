@@ -145,7 +145,8 @@ Figure 2 に SYN segment の構造を示す。
     コネクション交渉中は、互いの指定された値以上のパケットを送ってはならない。
     この数値はRUDPヘッダーのサイズも含む。これは交渉可能ではない。
 * Retransmission Timeout Value
-  * 伝達されていないパケットの再送に使われるタイムアウト値。
+  * 伝達されていないパケットの再送に使われるタイムアウト値。この値はミリ秒で指定される。
+    100 から 65536 の範囲でしていする。これは交渉可能で、両ピアが同じ値で合意しなければならない。
 * Cumulative Ack Timeout Value
 * Null Segment Timeout Value
 * Transfer State Timeout Value

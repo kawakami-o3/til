@@ -148,6 +148,10 @@ Figure 2 に SYN segment の構造を示す。
   * 伝達されていないパケットの再送に使われるタイムアウト値。この値はミリ秒で指定される。
     100 から 65536 の範囲でしていする。これは交渉可能で、両ピアが同じ値で合意しなければならない。
 * Cumulative Ack Timeout Value
+  * 他の segment が送られていない場合に、an acknowledgment segment を送るためのタイムアウト値。
+    この値はミリ秒で、100 から 65536 の範囲で指定する。このパラメータは交渉可能であり、両方の
+    ピアで同じ値で合意する必要がある。加えて、このパラメータは the Retransmission Timeout Value
+    よりちいさくなければならない。
 * Null Segment Timeout Value
 * Transfer State Timeout Value
 * Max Retrans

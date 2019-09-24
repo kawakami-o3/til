@@ -153,6 +153,10 @@ Figure 2 に SYN segment の構造を示す。
     ピアで同じ値で合意する必要がある。加えて、このパラメータは the Retransmission Timeout Value
     よりちいさくなければならない。
 * Null Segment Timeout Value
+  * A data segment が送られていないときに null segment を送るタイムアウト値。すなわち、the null
+    segment は keep-alive 機構として働く。この値はミリ秒として指定される。
+    値の範囲は 0 から 65536 である。0の値は null segments を無効化する。これは交渉可能であり、
+    同じ値で合意しなければならない。
 * Transfer State Timeout Value
 * Max Retrans
 * Max Cum Ack

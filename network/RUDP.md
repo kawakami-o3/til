@@ -158,6 +158,8 @@ Figure 2 に SYN segment の構造を示す。
     値の範囲は 0 から 65536 である。0の値は null segments を無効化する。これは交渉可能であり、
     同じ値で合意しなければならない。
 * Transfer State Timeout Value
+  * An auto reset が発生する前に、状態を保存するためのタイムアウト値。
+    ミリ秒、0 から 65536、交渉可能でピア間で共有。
 * Max Retrans
 * Max Cum Ack
 * Max Out of Seq

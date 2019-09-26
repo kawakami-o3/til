@@ -155,14 +155,23 @@ Figure 2 に SYN segment の構造を示す。
 * Null Segment Timeout Value
   * A data segment が送られていないときに null segment を送るタイムアウト値。すなわち、the null
     segment は keep-alive 機構として働く。この値はミリ秒として指定される。
-    値の範囲は 0 から 65536 である。0の値は null segments を無効化する。これは交渉可能であり、
-    同じ値で合意しなければならない。
+    値の範囲は 0 から 65536 である。0の値は null segments を無効化する。
+    交渉可能で、ピア間で共有。
 * Transfer State Timeout Value
   * An auto reset が発生する前に、状態を保存するためのタイムアウト値。
     ミリ秒、0 から 65536、交渉可能でピア間で共有。
 * Max Retrans
+  * Connection が切断されたと判断する前に、consectutive retransmission(s) を試みる時間の最大値。
+    0 から 255 までの値を指定する。0 は永遠に再送することを示す。
+    交渉可能で、ピア間で共有。
 * Max Cum Ack
+  * Acknowledgments を蓄積する最大数。0 から 255 まで。0 は、受け取ったデータが null や reset segment
+    であっても acknowledgment を即座に送る。
+    交渉可能で、ピア間で共有。
 * Max Out of Seq
+  * EACK segment が送られる前に蓄積される、順序外パケットの最大数。
+    0 から 255。0は EACK が即座に送信されることを示す。
+    交渉可能で、ピア間で共有。
 * Max Auto Reset
 * Connection Identifier
 		

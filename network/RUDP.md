@@ -173,8 +173,16 @@ Figure 2 に SYN segment の構造を示す。
     0 から 255。0は EACK が即座に送信されることを示す。
     交渉可能で、ピア間で共有。
 * Max Auto Reset
+  * Connection をリセットする前に行う consecutive auto resetの最大数。
+    0 から 255。0 は auto reset を試みないことをしめし、connection は即座にリセットされる、
+    auto reset 条件が発生していても。
+    交渉可能で、ピア間で共有。
+    Consecutive auto reset counter は connection が開かれた時にクリアされる。
 * Connection Identifier
-		
+  * 新しい connection を開くとき、各ピアは a connection identifier を送信する。
+    A connection identifier はすべての RUDP current connections でユニークである。
+    互いに送られてきた the connection ID を保存する。An auto reset が実行された場合、
+    ピアは保存された connection ID を送り、auto reset が実行されていることを伝える。
 
 ### 3. ACK Segment
 

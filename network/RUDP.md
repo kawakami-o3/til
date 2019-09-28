@@ -186,6 +186,26 @@ Figure 2 に SYN segment の構造を示す。
 
 ### 3. ACK Segment
 
+The ACK segment は in-sequence segments を通知するために使われる。
+The next sequence number と acknowledgment sequence numberがヘッダーに含まれている。
+The ACK segment は a separate segment として送られるかもしれない。
+ただし、可能であればデータと共に送られるべきである。
+Data and Null segments はいつでも ACK ビットと Acknoledgement Number フィールドを含む。
+単独の ACK segment のサイズは 6 オクテットである。
+
+```
+    0 1 2 3 4 5 6 7 8            15
+   +-+-+-+-+-+-+-+-+---------------+
+   |0|1|0|0|0|0|0|0|       6       |
+   +-+-+-+-+-+-+-+-+---------------+
+   | Sequence #    |   Ack Number  |
+   +---------------+---------------+
+   |           Checksum            |
+   +---------------+---------------+
+
+    Figure 3, Stand-alone ACK segment
+```
+
 ### 4. EACK Segment
 
 ### 5. RST Segment

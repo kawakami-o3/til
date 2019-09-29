@@ -208,6 +208,30 @@ Data and Null segments はいつでも ACK ビットと Acknoledgement Number �
 
 ### 4. EACK Segment
 
+The EACK segment は、順序外に受信された segments を通達するために使われる。
+The EACK は受信した segments の sequence nubmers を、一つまたは複数含んでいる。
+The EACK は常に ACK と混合され、最後に受信された順通りの sequence number を与える。
+ヘッダー長は可変で、最小で 7、最大で the maximum receive queue length となる。
+
+```
+    0 1 2 3 4 5 6 7 8            15
+   +-+-+-+-+-+-+-+-+---------------+
+   |0|1|1|0|0|0|0|0|     N + 6     |
+   +-+-+-+-+-+-+-+-+---------------+
+   | Sequence #    |   Ack Number  |
+   +---------------+---------------+
+   |1st out of seq |2nd out of seq |
+   |  ack number   |   ack number  |
+   +---------------+---------------+
+   |  . . .        |Nth out of seq |
+   |               |   ack number  |
+   +---------------+---------------+
+   |            Checksum           |
+   +---------------+---------------+
+
+       Figure 4, EACK segment
+```
+
 ### 5. RST Segment
 
 ### 6. NUL Segment

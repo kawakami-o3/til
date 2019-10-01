@@ -257,6 +257,26 @@ The RST は独立した segment として送られ、他のデータを含まな
 
 ### 6. NUL Segment
 
+The NUL segment は他方の connection がまだ生きているか判断するために使われる。
+すなわち keep-alive として働く。
+A NUL segment が受信されると、RUDP実装はただちに ACK を送らなければならない。
+ただし、connectionが存在し、sequence number が順通り出会った場合に限る。
+
+
+```
+    0 1 2 3 4 5 6 7 8            15
+   +-+-+-+-+-+-+-+-+---------------+
+   |0|1|0|0|1|0|0|0|       6       |
+   +-+-+-+-+-+-+-+-+---------------+
+   | Sequence #    |  Ack Number   |
+   +---------------+---------------+
+   |            Checksum           |
+   +---------------+---------------+
+
+        Figure 6, NUL segment
+```
+
+
 ### 7. TCS Segment
 
 ## 1.3.1 Detaild Design

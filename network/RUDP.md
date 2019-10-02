@@ -279,6 +279,42 @@ A NUL segment が受信されると、RUDP実装はただちに ACK を送らな
 
 ### 7. TCS Segment
 
+The TSC は connection の状態を転送するために使われる。
+
+```
+    0 1 2 3 4 5 6 7 8            15
+   +-+-+-+-+-+-+-+-+---------------+
+   | |A| | | | | | |               |
+   |0|C|0|0|0|0|1|0|       12      |
+   | |K| | | | | | |               |
+   +-+-+-+-+-+-+-+-+---------------+
+   | Sequence #    |   Ack Number  |
+   +---------------+---------------+
+   | Seq Adj Factor|      Spare    |
+   +---------------+---------------+
+   |      Connection Identifier    |
+   +                               +                                                                                                                     +
+   |       (32 bits in length)     |
+   +---------------+---------------+
+   |            Checksum           |
+   +---------------+---------------+
+
+          Figure 7, TCS segment
+```
+
+* Sequence Number
+  * The sequence number は初期値を含む。
+* Acknoledgment Number
+  * The acknoledgment number は受信者が受け取ったパケットのうち、順通りの最後のパケットを示している。
+* Seq Adj Factor
+  * この値は、新旧の connection で sequence number を調整するために使われる。
+* Connection Identifier
+  * 新しい connection を開くとき、各ピアは a connection identifier を転送する。
+    これはすべての確立中 RUDP connection 中で一意である。どちらの側も受け取った the connection ID を保存する。
+    この値は、この connection に転送されている相手の connection を通知するために使われる。
+
+
+
 ## 1.3.1 Detaild Design
 
 ## 1.3.2 Feature Description

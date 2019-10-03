@@ -317,7 +317,17 @@ The TSC は connection の状態を転送するために使われる。
 
 ## 1.3.1 Detaild Design
 
+別ドラフトで詳細を検討中。
+
 ## 1.3.2 Feature Description
+
+RUDP では以下の機能をサポートしている。
+以下では、送信者と受信者はクライアントとサーバーとされ、a connection にデータセグメントを送信するか、
+受信するかに対応している。
+クライアントは the connection を初期化する側のピアであり、サーバーは a connection に対して待機している側のピアを指す。
+A connection は、一意なIP address/UDP port のペアを提供するインターフェースとして定義される。
+サーバーとクライアントは特定のIP address/UDP portに対して多重に connections を持つことができる。
+それぞれの connection は一意な IP address/UDP port のペアを持つ。
 
 ### 1. Retransmission Timer
 

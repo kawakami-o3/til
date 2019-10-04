@@ -331,6 +331,15 @@ A connection は、一意なIP address/UDP port のペアを提供するイン�
 
 ### 1. Retransmission Timer
 
+送信者は再送タイマーを持ち、これは調整可能なタイムアウト値である。
+このタイマーは、データや null や reset segment が送られるたびに初期化され、
+確認待ちの segment がなくなったときにも初期化される。
+このデータsegmentに対しての受信確認を時間内に受け取れなかった場合、
+すべての確認待ちsegmentを再送する。
+確認待ちのsegmentを受信した時に再送タイマーはリセットされる。
+たとえ、確認待ちのsegmentが他にあったとしても。
+再送タイマーの推奨値は 600 ms である。
+
 ### 2. Retransmission Counter
 
 ### 3. Stand-alone Acknoledgments

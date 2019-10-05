@@ -342,6 +342,12 @@ A connection は、一意なIP address/UDP port のペアを提供するイン�
 
 ### 2. Retransmission Counter
 
+送信者は a segment を再送した回数のカウンターを管理する。
+このカウンターの最大値は調整可能で、推奨値は 2 である。
+このカウンターが最大値を超えた場合、
+connection が切断されているとみなされる。
+切断された connection の取り扱いについては No. 14 を参照。
+
 ### 3. Stand-alone Acknoledgments
 
 ### 4. Piggyback Acknoledgments

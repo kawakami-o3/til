@@ -360,6 +360,12 @@ the acknowledgment number field に含める。
 
 ### 5. Cumulative Acknoledge Counter
 
+受信者は、受信確認できていない segments のカウンターを管理する。
+このカウンターの最大値は調整可能である。このカウンターの最大値を超えた場合、
+受信者は a stand-alone scknowledgment か an extended acknowledgment 送り、
+順除外の segments があることを知らせる。
+推奨値は 3 である。
+
 ### 6. Out-of-sequence Acknoledgments Counter
 
 ### 7. Cumulative Acknoledge Timer

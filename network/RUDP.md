@@ -350,7 +350,13 @@ connection が切断されているとみなされる。
 
 ### 3. Stand-alone Acknoledgments
 
+A stand-alone acknoledgment segment とは、受信確認情報のみを含む segment である。
+その sequence number は次に送られる segment (nullやreset含む) の sequence number を含む。
+
 ### 4. Piggyback Acknoledgments
+
+受信者が送信者に segment を送るときはいつでも、受信者は最後に受信した順通りの sequence number を
+the acknowledgment number field に含める。
 
 ### 5. Cumulative Acknoledge Counter
 

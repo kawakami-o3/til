@@ -368,6 +368,14 @@ the acknowledgment number field に含める。
 
 ### 6. Out-of-sequence Acknoledgments Counter
 
+順序外に届いた segment についてもカウンターを管理する。
+最大値は調整可能。
+最大値を超えた場合は、an extended acknoledgment segment を送信する。
+その中には順序外に届いたすべての segments の sequence number が含まれている。
+推奨値は 3 である。
+
+An etended acknoledgments を受け取った送信者は、ロストしたと思われる segments を送信する。
+
 ### 7. Cumulative Acknoledge Timer
 
 ### 8. Null Segment Timer

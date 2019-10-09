@@ -348,17 +348,17 @@ A connection は、一意なIP address/UDP port のペアを提供するイン�
 connection が切断されているとみなされる。
 切断された connection の取り扱いについては No. 14 を参照。
 
-### 3. Stand-alone Acknoledgments
+### 3. Stand-alone Acknowledgments
 
 A stand-alone acknoledgment segment とは、受信確認情報のみを含む segment である。
 その sequence number は次に送られる segment (nullやreset含む) の sequence number を含む。
 
-### 4. Piggyback Acknoledgments
+### 4. Piggyback Acknowledgments
 
 受信者が送信者に segment を送るときはいつでも、受信者は最後に受信した順通りの sequence number を
 the acknowledgment number field に含める。
 
-### 5. Cumulative Acknoledge Counter
+### 5. Cumulative Acknowledge Counter
 
 受信者は、受信確認できていない segments のカウンターを管理する。
 このカウンターの最大値は調整可能である。このカウンターの最大値を超えた場合、
@@ -366,7 +366,7 @@ the acknowledgment number field に含める。
 順除外の segments があることを知らせる。
 推奨値は 3 である。
 
-### 6. Out-of-sequence Acknoledgments Counter
+### 6. Out-of-sequence Acknowledgments Counter
 
 順序外に届いた segment についてもカウンターを管理する。
 最大値は調整可能。
@@ -376,7 +376,19 @@ the acknowledgment number field に含める。
 
 An etended acknoledgments を受け取った送信者は、ロストしたと思われる segments を送信する。
 
-### 7. Cumulative Acknoledge Timer
+### 7. Cumulative Acknowledge Timer
+
+Ack が送れていない segment、もじくは順序から外れた segment がある場合、
+受信者は the cumulative acknowledge timer のタイムアウトを待った上で
+a stand-alone acknowledgment か an extended acknowledgment を送る。
+順序から外れた segment があるなら an extended acknowledgment、
+Ack を送っていない segment なら a stand-alone acknowledgment。
+推奨値は 300 ms。
+
+The cumulative acknowledge timer は、順序から外れた segment がない場合、
+ack を送る時に再起動される(再び ack を送るべき segment がたまるまでは待機)。
+順序から外れた segment がある場合は、再起動されず、タイムアウトのたびに
+an extended acknowledgment が送られる。
 
 ### 8. Null Segment Timer
 

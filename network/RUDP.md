@@ -392,6 +392,16 @@ an extended acknowledgment が送られる。
 
 ### 8. Null Segment Timer
 
+クライアントは、a null segment timer を接続した時にスタートし、
+データを送信するたびにリセットする。
+タイムアウトした場合、クライアントは a null segment をサーバーに送信する。
+The null segment は、its sequence number が正しければ、サーバーで受理される。
+サーバーは a null segment timer をクライアントの倍のタイムアウト値で管理する。
+サーバーのタイマーはデータを受信するたびにリセットされる。
+タイムアウトした場合は、接続が切れたものとして扱う。
+切れた接続の扱いについては No. 14 を参照。
+推奨値は 2 秒。
+
 ### 9. Auto Reset
 
 ### 10. Receiver Input Queue Size

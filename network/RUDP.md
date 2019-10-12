@@ -404,6 +404,20 @@ The null segment は、its sequence number が正しければ、サーバーで�
 
 ### 9. Auto Reset
 
+クライアントとサーバーどちらも an auto reset を開始できる。
+An auto reset が起こるのは、
+the retransmission count が最大値を超えた時、
+サーバーの the null segment timer がタイムアウトした時、
+the transfer state timer がタイムアウトした時である。
+An auto reset によって両ピアは現在の状態をリセットし、
+再送と順序外のキューを開放し、sequence number を初期化し、
+接続を再交渉する。
+それぞれのピアが Upper Layer Protocol (ULP) を通知する。
+A consecutive reset counter で auto-reset の最大数を管理する。
+この最大値を超えたときに接続をリセットする。
+推奨値は 3。
+
+
 ### 10. Receiver Input Queue Size
 
 ### 11. Congestion Control And Slow Start

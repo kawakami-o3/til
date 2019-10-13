@@ -417,12 +417,19 @@ A consecutive reset counter で auto-reset の最大数を管理する。
 この最大値を超えたときに接続をリセットする。
 推奨値は 3。
 
-
 ### 10. Receiver Input Queue Size
+
+受信者の受信キューのサイズは調整可能なパラメータである。
+推奨値は 32 パケットである。
+このパラメータは流量コントロール機構として働く。
 
 ### 11. Congestion Control And Slow Start
 
+RUDP ではサポートしていない。
+
 ### 12. UDP Port Numbers
+
+使用するポートに制限はなく、RFC 1700 で定義されていないポートなら利用可能である。
 
 ### 13. Support For Redundant Connections
 

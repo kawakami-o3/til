@@ -433,6 +433,15 @@ RUDP ではサポートしていない。
 
 ### 13. Support For Redundant Connections
 
+RUDP 接続に失敗した場合、the Upper Layer Protocol は通知を受け、
+the transfer state timer が起動するだろう。
+The ULP は API コールを通してもう一方の RUDP 接続への転送を開始でき、
+RUDP は新しいコネクションに対してパケットの重複やロストを確認しながら状態を転送する。
+The Transfer State Timer がタイムアウトする前に転送を開始しなかった場合、
+接続情報は失われ、バッファは開放される。
+タイムアウト値は調整可能である。
+推奨値は 1 秒。
+
 ### 14. Broken Connection Handling
 
 ### 15. Retransmission Algorithm

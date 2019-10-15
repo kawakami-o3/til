@@ -444,6 +444,19 @@ The Transfer State Timer がタイムアウトする前に転送を開始しな�
 
 ### 14. Broken Connection Handling
 
+RUDP 接続は以下の条件で切断されたと判断される。
+
+* The Retransmission Timer がタイムアウトし、the Retransmission Count が最大値を超えた
+* サーバーの Null Segment Timer がタイム・アウトした
+
+上記のどれかを満たし、the Transfer State timeout value がゼロでない場合、
+the ULP は接続失敗シグナルを受け取り、the Transfer State Timer が起動する。
+The Transfer State Timer がタイムアウトした場合、
+Auto Reset が行われ、the ULP は auto reset シグナルを受け取る。
+
+The transfer state timeout value がゼロなら、直ちに an auto reset が行われる。
+The ULP は auto reset シグナルを通じて接続失敗を知らされる。
+
 ### 15. Retransmission Algorithm
 
 ### 16. Single To Upper Layer Protocol (ULP)

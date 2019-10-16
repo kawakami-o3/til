@@ -459,6 +459,15 @@ The ULP は auto reset シグナルを通じて接続失敗を知らされる。
 
 ### 15. Retransmission Algorithm
 
+EACKを受信したり、the Retransmission timer がタイムアウトすると再送が発生する。
+
+EACK を受信した場合、メッセージで指定された segments は未 ACK のキューから削除される。
+再送するsegmentsは、the Ack Number と最後の seq ack number を解析して決まる。
+この2つの間にある segments (2つは含まない) で、未 ACK キューにあるものが再送される。
+
+The Retransmission timer がタイムアウトした場合、すべての未 ACK キューにある
+メッセージが再送される。
+
 ### 16. Single To Upper Layer Protocol (ULP)
 
 ### 17. Checksum Algorithm

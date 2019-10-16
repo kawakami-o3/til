@@ -470,6 +470,21 @@ The Retransmission timer がタイムアウトした場合、すべての未 ACK
 
 ### 16. Single To Upper Layer Protocol (ULP)
 
+以下に ULP に API を通じて送られるシグナルを挙げる。
+これらは非同期に ULP に伝えられる。
+
+* Connection open
+  * 接続状態が Open に移行した時に発生する
+* Connection refused
+  * Close Wait 状態以外の状態から Close に移行した時に発生する
+* Connection closed
+  * Close Wait から Close に移行した時に発生する
+* Connection failure
+  * section 1.3.2 や No. 15 で述べたように、接続が壊れた時に発生する。
+* Connection auto reset
+  * auto reset が起きた時に発生する。データロストが発生し RUDP が接続状態を Open に
+    戻そうとしていることを示している。
+
 ### 17. Checksum Algorithm
 
 ### 18. FEC

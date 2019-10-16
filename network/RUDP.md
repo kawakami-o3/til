@@ -487,6 +487,10 @@ The Retransmission timer がタイムアウトした場合、すべての未 ACK
 
 ### 17. Checksum Algorithm
 
+RUDP で用いる checksum アルゴリズムは UDP, TCP ヘッダーで使されているものと同じ。
+
+
+
 ### 18. FEC
 
 ### 19. Security

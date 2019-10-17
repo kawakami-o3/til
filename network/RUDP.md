@@ -487,13 +487,21 @@ The Retransmission timer がタイムアウトした場合、すべての未 ACK
 
 ### 17. Checksum Algorithm
 
-RUDP で用いる checksum アルゴリズムは UDP, TCP ヘッダーで使されているものと同じ。
-
-
+RUDP で用いる checksum アルゴリズムは UDP, TCP ヘッダーで使されているものと同じで、
+16 bit の 1 の補数和の 1 の補数である。
+接続が開かれたときに交渉が済んだ場合、チェックサムはRUDPパケット全体に対して計算される。
+交渉は、接続時の SYN segment にある CHK bit の設定に基づく。
+それ以外は、RUDP ヘッダーに対してのみ計算される。
+実装詳細については、RFC 1071 を参照。
 
 ### 18. FEC
 
+RUDP は Forward Error Correction の手続きについて規定しない。
+重複パケットを生成するアルゴリズムであっても、受信時に捨てられるので問題はない。
+
 ### 19. Security
+
+IPsec標準に準拠。
 
 ## 1.4 Feature Negotiation
 

@@ -505,5 +505,13 @@ IPsec標準に準拠。
 
 ## 1.4 Feature Negotiation
 
+クライアントが接続を開始するときは、a SYN segment を送信する。
+SYN には、ULPがAPI経由で規定した交渉可能なパラメータが含まれている。
+サーバーは、これらのパラメータを受理するなら ACK に SYN をそのまま返し、
+そうでなければ提案するパラメータを SYN に含めて ACK を返す。
+クライアントはそこでサーバーから送られたパラメータを受理するか、
+RST を送って接続を拒絶できる。
+An auto reset 中には機能を交渉することはできない。
+
 ## 2.0 Future Potential Enchancements
 

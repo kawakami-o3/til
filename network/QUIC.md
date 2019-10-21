@@ -492,6 +492,9 @@ QUIC の variable-length エンコーディングは最上位の 2 ビットを�
 
 # 19. Frame Types and Formats
 
+Section 12.4 で述べたように、パケットは複数のフレームを含むことがある。
+このセクションでは、QUICのコアとなるフレームのフォーマットとセマンティクスについて説明する。
+
 ## 19.1. PADDING Frame
 
 PADDING フレーム (type=0x00) は意味論的な値を持たない。

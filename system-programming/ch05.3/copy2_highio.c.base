@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+
+#define COPYSIZE NNN
+#define BUFSIZE 4096
+
+double getETime() {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return tv.tv_sec + (double)tv.tv_usec * 1e-6;
+}
+
+int main(int argc, char *argv[]) {
+  FILE *fpin, *fpout;
+  double st, en;
+  char c[COPYSIZE];
+  char bufin[BUFSIZE];
+  char bufout[BUFSIZE];
+  size_t bytes_read;
+
+  if (argc != 3) {
+    fprintf(stderr, "Usage: ./copy_highio in out");
+    exit(EXIT_FAILURE);
+  }
+
+  if ((fpin = fopen(argv[1], "rb")) == NULL) {
+    perror(argv[1]);
+    exit(EXIT_FAILURE);
+  }
+
+  if ((fpout = fopen(argv[2], "wb")) == NULL) {
+    perror(argv[2]);
+    exit(EXIT_FAILURE);
+  }
+
+  if (setvbuf(fpin, bufin, _IOFBF, BUFSIZE) != 0) {
+    perror("setvbuf in");
+    exit(EXIT_FAILURE);
+  }
+
+  if (setvbuf(fpout, bufout, _IOFBF, BUFSIZE) != 0) {
+    perror("setvbuf in");
+    exit(EXIT_FAILURE);
+  }
+
+  st = getETime();
+  while ((bytes_read = fread(c, 1, COPYSIZE, fpin)) > 0) {
+    fwrite(c, 1, bytes_read, fpout);
+  }
+
+  // NG. fread reads COPYSIZE bytes even if the rest size is below COPYSIZE.
+  //while ((bytes_read = fread(c, COPYSIZE, 1, fpin)) > 0) {
+  //  fwrite(c, bytes_read, 1, fpout);
+  //}
+
+  en = getETime();
+
+  fclose(fpin);
+  fclose(fpout);
+
+  printf("Elapsed Time: %.6f\n", en - st);
+}

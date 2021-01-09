@@ -271,9 +271,95 @@ php-7.4.14/Zend/zend_hash.h
 
 ## 比較実験
 
+リンクリストのようにポインタを辿るのと、配列のようにポインタをずらすのとでどの程度パフォーマンスに差が出るのかに注目して比較してみる。
 
+```c
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+#define N 10000
+#define TRIAL 10000
+
+//#define N 10
+//#define TRIAL 1
+
+typedef struct Cell {
+    int value;
+    struct Cell *next;
+} Cell;
+
+Cell *make_cell(int i) {
+    Cell *c = malloc(sizeof(Cell));
+    c->value = i;
+    c->next = NULL;
+    return c;
+}
+
+int main(void) {
+    Cell *cells[N];
+
+    int v = 1;
+    for (int i=0; i<N; i++) {
+        cells[i] = make_cell(v);
+        v *= -1;
+    }
+
+    for (int i=0; i<N-1; i++) {
+        cells[i]->next = cells[i+1];
+    }
+
+
+    {
+        long start = clock();
+        for (int j=0; j<TRIAL; j++) {
+            int sum = 0;
+            Cell **ptr = cells;
+            do {
+                sum += (*ptr)->value;
+                ptr++;
+            } while (ptr-cells<N);
+            //printf("%d\n", sum);
+        }
+        printf("%f s\n", (double)(clock() - start)/CLOCKS_PER_SEC);
+    }
+
+    {
+        long start = clock();
+        for (int j=0; j<TRIAL ; j++) {
+            int sum = 0;
+            Cell *cur = cells[0];
+            do {
+                sum += cur->value;
+                cur = cur->next;
+            } while (cur != NULL);
+            //printf("%d\n", sum);
+        }
+        printf("%f s\n", (double)(clock() - start)/CLOCKS_PER_SEC);
+    }
+
+    return 0;
+}
+```
+
+
+結果は
+
+```
+> gcc -O0 array_vs_list.c && ./a.out                                                                                                                                          
+0.157255 s
+0.244820 s
+```
+
+2倍とまではいかないものの、配列のようにポインタをずらす方が速いことがわかる。
 
 ## まとめ
+
+in_arrayを起点としてPHP5とPHP7の実装を確認してみた。
+PHP7の方は、連想配列が普通の配列のような実装になっており、その差がin_arrayの性能差として現れている。
+
+しかし、それだけではまだ説明できない性能差もあり、他にも性能改善施策が施されていると思われる。
+
 
 ## おまけ
 

@@ -49,6 +49,64 @@ echo "{$result}\n";
 
 ## PHP5のin_array実装
 
+php-5.6.40/ext/standard/array.c
+
+```c
+/* void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
+ * 0 = return boolean
+ * 1 = return key
+ */
+static void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior) /* {{{ */
+{
+	zval *value,				/* value to check for */
+		 *array,				/* array to check in */
+		 **entry,				/* pointer to array entry */
+		  res;					/* comparison result */
+	HashPosition pos;			/* hash iterator */
+	zend_bool strict = 0;		/* strict comparison or not */
+	int (*is_equal_func)(zval *, zval *, zval * TSRMLS_DC) = is_equal_function;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "za|b", &value, &array, &strict) == FAILURE) {
+		return;
+	}
+
+	if (strict) {
+		is_equal_func = is_identical_function;
+	}
+
+	zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(array), &pos);
+	while (zend_hash_get_current_data_ex(Z_ARRVAL_P(array), (void **)&entry, &pos) == SUCCESS) {
+		is_equal_func(&res, value, *entry TSRMLS_CC);
+		if (Z_LVAL(res)) {
+			if (behavior == 0) {
+				RETURN_TRUE;
+			} else {
+				zend_hash_get_current_key_zval_ex(Z_ARRVAL_P(array), return_value, &pos);
+				return;
+			}
+		}
+		zend_hash_move_forward_ex(Z_ARRVAL_P(array), &pos);
+	}
+
+	RETURN_FALSE;
+}
+/* }}} */
+
+/* {{{ proto bool in_array(mixed needle, array haystack [, bool strict])
+   Checks if the given value exists in the array */
+PHP_FUNCTION(in_array)
+{
+	php_search_array(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+}
+/* }}} */
+```
+
+php-5.6.40/Zend/zend_hash.c
+
+```c
+```
+
+
 ## PHP7のin_array実装
 
 ## 比較実験

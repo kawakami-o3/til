@@ -124,7 +124,7 @@ ZEND_API int zend_hash_move_forward_ex(HashTable *ht, HashPosition *pos)
 
 php-7.4.14/etc/standard/array.c
 
-```
+```c
 /* void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
  * 0 = return boolean
  * 1 = return key
@@ -253,7 +253,7 @@ php-7.4.14/Zend/zend_hash.h
 
 php-7.4.14/Zend/zend_hash.h
 
-```
+```c
 #define ZEND_HASH_FOREACH(_ht, indirect) do { \
         HashTable *__ht = (_ht); \
         Bucket *_p = __ht->arData; \

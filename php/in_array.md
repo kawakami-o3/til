@@ -346,7 +346,7 @@ int main(void) {
 結果は
 
 ```
-> gcc -O0 array_vs_list.c && ./a.out                                                                                                                                          
+> gcc -O0 array_vs_list.c && ./a.out
 0.157255 s
 0.244820 s
 ```

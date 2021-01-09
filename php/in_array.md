@@ -122,8 +122,214 @@ ZEND_API int zend_hash_move_forward_ex(HashTable *ht, HashPosition *pos)
 
 ## PHP7のin_array実装
 
+php-7.4.14/etc/standard/array.c
+
+```
+/* void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior)
+ * 0 = return boolean
+ * 1 = return key
+ */
+static inline void php_search_array(INTERNAL_FUNCTION_PARAMETERS, int behavior) /* {{{ */
+{
+	zval *value,				/* value to check for */
+		 *array,				/* array to check in */
+		 *entry;				/* pointer to array entry */
+	zend_ulong num_idx;
+	zend_string *str_idx;
+	zend_bool strict = 0;		/* strict comparison or not */
+
+	ZEND_PARSE_PARAMETERS_START(2, 3)
+		Z_PARAM_ZVAL(value)
+		Z_PARAM_ARRAY(array)
+		Z_PARAM_OPTIONAL
+		Z_PARAM_BOOL(strict)
+	ZEND_PARSE_PARAMETERS_END();
+
+	if (strict) {
+		if (Z_TYPE_P(value) == IS_LONG) {
+			ZEND_HASH_FOREACH_KEY_VAL_IND(Z_ARRVAL_P(array), num_idx, str_idx, entry) {
+				ZVAL_DEREF(entry);
+				if (Z_TYPE_P(entry) == IS_LONG && Z_LVAL_P(entry) == Z_LVAL_P(value)) {
+					if (behavior == 0) {
+						RETURN_TRUE;
+					} else {
+						if (str_idx) {
+							RETVAL_STR_COPY(str_idx);
+						} else {
+							RETVAL_LONG(num_idx);
+						}
+						return;
+					}
+				}
+			} ZEND_HASH_FOREACH_END();
+		} else {
+			ZEND_HASH_FOREACH_KEY_VAL_IND(Z_ARRVAL_P(array), num_idx, str_idx, entry) {
+				ZVAL_DEREF(entry);
+				if (fast_is_identical_function(value, entry)) {
+					if (behavior == 0) {
+						RETURN_TRUE;
+					} else {
+						if (str_idx) {
+							RETVAL_STR_COPY(str_idx);
+						} else {
+							RETVAL_LONG(num_idx);
+						}
+						return;
+					}
+				}
+			} ZEND_HASH_FOREACH_END();
+		}
+	} else {
+		if (Z_TYPE_P(value) == IS_LONG) {
+			ZEND_HASH_FOREACH_KEY_VAL_IND(Z_ARRVAL_P(array), num_idx, str_idx, entry) {
+				if (fast_equal_check_long(value, entry)) {
+					if (behavior == 0) {
+						RETURN_TRUE;
+					} else {
+						if (str_idx) {
+							RETVAL_STR_COPY(str_idx);
+						} else {
+							RETVAL_LONG(num_idx);
+						}
+						return;
+					}
+				}
+			} ZEND_HASH_FOREACH_END();
+		} else if (Z_TYPE_P(value) == IS_STRING) {
+			ZEND_HASH_FOREACH_KEY_VAL_IND(Z_ARRVAL_P(array), num_idx, str_idx, entry) {
+				if (fast_equal_check_string(value, entry)) {
+					if (behavior == 0) {
+						RETURN_TRUE;
+					} else {
+						if (str_idx) {
+							RETVAL_STR_COPY(str_idx);
+						} else {
+							RETVAL_LONG(num_idx);
+						}
+						return;
+					}
+				}
+			} ZEND_HASH_FOREACH_END();
+		} else {
+			ZEND_HASH_FOREACH_KEY_VAL_IND(Z_ARRVAL_P(array), num_idx, str_idx, entry) {
+				if (fast_equal_check_function(value, entry)) {
+					if (behavior == 0) {
+						RETURN_TRUE;
+					} else {
+						if (str_idx) {
+							RETVAL_STR_COPY(str_idx);
+						} else {
+							RETVAL_LONG(num_idx);
+						}
+						return;
+					}
+				}
+			} ZEND_HASH_FOREACH_END();
+ 		}
+	}
+
+	RETURN_FALSE;
+}
+/* }}} */
+
+/* {{{ proto bool in_array(mixed needle, array haystack [, bool strict])
+   Checks if the given value exists in the array */
+PHP_FUNCTION(in_array)
+{
+	php_search_array(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0);
+}
+/* }}} */
+```
+
+php-7.4.14/Zend/zend_hash.h
+
+```c
+#define ZEND_HASH_FOREACH_KEY_VAL_IND(ht, _h, _key, _val) \
+    ZEND_HASH_FOREACH(ht, 1); \
+    _h = _p->h; \
+    _key = _p->key; \
+    _val = _z;
+```
+
+php-7.4.14/Zend/zend_hash.h
+
+```
+#define ZEND_HASH_FOREACH(_ht, indirect) do { \
+        HashTable *__ht = (_ht); \
+        Bucket *_p = __ht->arData; \
+        Bucket *_end = _p + __ht->nNumUsed; \
+        for (; _p != _end; _p++) { \
+            zval *_z = &_p->val; \
+            if (indirect && Z_TYPE_P(_z) == IS_INDIRECT) { \
+                _z = Z_INDIRECT_P(_z); \
+            } \
+            if (UNEXPECTED(Z_TYPE_P(_z) == IS_UNDEF)) continue;
+```
+
+こちらはいわゆる普通の配列っぽい処理になっていることがわかる。
 
 
 ## 比較実験
 
 
+
+## まとめ
+
+## おまけ
+
+zend_hash_get_current_data_ex の実装を見てみると、
+
+php-5.6.40/Zend/zend_hash.c
+
+```c
+ZEND_API int zend_hash_get_current_data_ex(HashTable *ht, void **pData, HashPosition *pos)
+{
+    Bucket *p;
+
+    p = pos ? (*pos) : ht->pInternalPointer;
+
+    IS_CONSISTENT(ht);
+
+    if (p) {
+        *pData = p->pData;
+        return SUCCESS;
+    } else {
+        return FAILURE;
+    }
+}
+
+```
+
+php-7.4.14/Zend/zend_hash.c
+
+```c
+static zend_always_inline HashPosition _zend_hash_get_valid_pos(const HashTable *ht, HashPosition pos)
+{
+    while (pos < ht->nNumUsed && Z_ISUNDEF(ht->arData[pos].val)) {
+        pos++;
+    }
+    return pos;
+}
+
+...
+...
+...
+
+ZEND_API zval* ZEND_FASTCALL zend_hash_get_current_data_ex(HashTable *ht, HashPosition *pos)
+{
+    uint32_t idx;
+    Bucket *p;
+
+    IS_CONSISTENT(ht);
+    idx = _zend_hash_get_valid_pos(ht, *pos);
+    if (idx < ht->nNumUsed) {
+        p = ht->arData + idx;
+        return &p->val;
+    } else {
+        return NULL;
+    }
+}
+```
+
+PHP7の方は普通の配列のような実装になっているため、unsetで歯抜けになる。
+その部分をスキップする処理が入っている。

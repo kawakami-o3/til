@@ -104,10 +104,25 @@ PHP_FUNCTION(in_array)
 php-5.6.40/Zend/zend_hash.c
 
 ```c
+ZEND_API int zend_hash_move_forward_ex(HashTable *ht, HashPosition *pos)
+{
+  HashPosition *current = pos ? pos : &ht->pInternalPointer;
+
+  IS_CONSISTENT(ht);
+
+  if (*current) {
+	  *current = (*current)->pListNext;
+	  return SUCCESS;
+  } else
+	  return FAILURE;
+}
 ```
 
+リンクリストっぽくたどっていることがわかる。
 
 ## PHP7のin_array実装
+
+
 
 ## 比較実験
 

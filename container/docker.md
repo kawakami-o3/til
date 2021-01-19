@@ -10,7 +10,8 @@ https://jawsdays2019.jaws-ug.jp/session/1527/
 ### イメージビルド
 
 ```
-docker build -t image-name:image-tag dockerfile-dir
+cd dockerfile-dir
+docker build -t image-name:image-tag .
 ```
 
 ### コンテナ起動

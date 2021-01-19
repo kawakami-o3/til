@@ -1,5 +1,40 @@
 # docker
 
+https://docs.docker.com/get-started/
+
+https://jawsdays2019.jaws-ug.jp/session/1527/
+
+
+## 逆引きtips
+
+イメージビルド
+
+```
+docker build -t image-name:image-tag dockerfile-dir
+```
+
+コンテナ起動
+
+```
+docker run --rm -it --init -p 3000:3000 -v from-dir:to-dir -u `id -u`:`id -g` image-name:image-tag
+```
+
+
+
+イメージ削除
+
+```
+docker image rm image-id
+docker image prune
+```
+
+コンテナ削除
+
+```
+docker container rm container-id
+docker container prune
+```
+
 ## docker run が失敗するケース1
 
 ```

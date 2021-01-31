@@ -14,5 +14,6 @@
 
 https://www.infoq.com/articles/build-a-container-golang/
 
+3つの要素 namespace, cgroup, filesystem。
 
 

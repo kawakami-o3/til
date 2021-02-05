@@ -616,4 +616,6 @@ middlebox の大部分が UDP 上から失われてしまう。
 * n月刊ラムダノート Vol.1, No.1(2019) TCPの再送制御機構
   * https://www.lambdanote.com/collections/n/products/nmonthly-vol-1-no-1-2019-ebook
   
-  
+# 実装
+
+* https://github.com/cloudflare/quiche

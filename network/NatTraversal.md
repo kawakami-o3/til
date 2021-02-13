@@ -14,4 +14,14 @@ https://tailscale.com/blog/how-nat-traversal-works/
 障害となるのは、ステートフルなファイヤーウォールとNATデバイス。
 
 
+## ファイヤーウォール
+
+* Windows Defender firewall
+* Ubuntu's ufw
+* BSD's pf
+* AWS's Security Groups
+
+インバウンドとアウトバウンド。
+
+
 

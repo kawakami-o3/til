@@ -16,12 +16,14 @@ https://tailscale.com/blog/how-nat-traversal-works/
 
 ## ファイヤーウォール
 
+たとえば
+
 * Windows Defender firewall
 * Ubuntu's ufw
 * BSD's pf
 * AWS's Security Groups
 
 インバウンドとアウトバウンド。
-
-
+ステートフルなファイヤーウォールは、パケットの行き来するのを記録して、インバンドかアウトバンドかを決めている。
+UDPであれば、インバウンドのパケットが許可されるのは、アウトバウンドに記録されていた場合。
 

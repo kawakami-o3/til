@@ -66,4 +66,19 @@ UDPであれば、インバウンドのパケットが許可されるのは、�
 
 ## The nature of NATs
 
+NAT のやっかいな機能として、パケットを変更してしまうことが挙げられる。
+NAT = Network Address Translator.
+
+問題となるのはSource NAT, SNAT。
+複数端末がひとつのIPアドレスのまとめられてしまう。
+
+### Navigating a NATty network
+
+適当にポートを選んで、プライベートIPと結びついた受信ポートとする。
+この挙動について図説あり。
+
+### A study in STUN
+
+
+
 

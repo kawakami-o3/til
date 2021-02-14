@@ -14,7 +14,7 @@ https://tailscale.com/blog/how-nat-traversal-works/
 障害となるのは、ステートフルなファイヤーウォールとNATデバイス。
 
 
-## ファイヤーウォール
+## Figuring out firewalls
 
 たとえば
 
@@ -30,5 +30,5 @@ UDPであれば、インバウンドのパケットが許可されるのは、�
 もっとゆるい例として、ファイヤーウォールの内側の端末（laptop）からパケットを送信した場合に、
 そのIPアドレスとポートへのパケットならすべて許容する場合もあるらしい。
 
-
+### Firewall face-off
 

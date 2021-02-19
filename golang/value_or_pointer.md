@@ -1,4 +1,4 @@
-# A Aalue Or Pointer
+# A Value Or Pointer
 
 
 [Go: Should I Use a Pointer instead of a Copy of my Struct?](https://medium.com/a-journey-with-go/go-should-i-use-a-pointer-instead-of-a-copy-of-my-struct-44b43b104963)

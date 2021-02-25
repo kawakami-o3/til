@@ -6,3 +6,7 @@ https://github.com/golang/go/wiki/CodeReviewComments
 
 
 
+* [Interfaces](#interfaces)
+
+## Interfaces
+

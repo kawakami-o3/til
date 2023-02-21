@@ -4,9 +4,12 @@
 
 https://learn.microsoft.com/ja-jp/azure/cosmos-db/docker-emulator-linux?tabs=sql-api%2Cssl-netstd21
 
-* linux, macOS では docker で立ち上げられる
-  * docker pull mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator
-* その場合の制限として、NoSQL, MongoDB API のみとなる
+linux, macOS では docker で立ち上げられる
+```
+docker pull mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator
+```
+
+その場合の制限として、NoSQL, MongoDB API のみとなる。また、Intelプロセッサのみのサポートとなっているため M1 mac では利用できない。
 
 NoSQL 用API を立ち上げるなら、以下のようなスクリプトになる
 

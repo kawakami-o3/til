@@ -19,3 +19,4 @@ https://twitter.com/hashtag/DBEM
 
 * [最強データベース講義シリーズ](https://dbsj.org/dbsj_lecture/)
 * [TPC-CによるScalarDBのベンチマーク方法について](https://medium.com/scalar-engineering-ja/scalardb-benchmark-with-tpc-c-df9e9f59245d)
+* [karmada](https://karmada.io/)

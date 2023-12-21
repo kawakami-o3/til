@@ -4,6 +4,7 @@
 
 https://scalar.connpass.com/event/298887/
 
+https://twitter.com/hashtag/DBEM
 
 * [DBアーキテクチャの比較と選択 - bulk load & random lookup workload](https://speakerdeck.com/frsyuki/dbakitekutiyanobi-jiao-toxuan-ze)
 * クラウドネイティブなデータベースの現在 - NewSQLとas a Service -

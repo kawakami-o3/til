@@ -201,10 +201,12 @@ FDL の split が独特:
   `(文字列, 連番)` のような複合キーにも効く。
 * LSM への応用の考察もある: hints は有効、fingerprint は2バイトにするべき、heads は不要、とのこと。
 
-## 疑問・深掘りしたいこと
+## 関連ノート
 
-* Key normalization の具体的なやり方 (Graefe "Modern B-Tree Techniques")
-* 楽観的ロックカップリングと vmcache の仕組み (Leis et al. 2019, 2023)
-* LeanStore の hints の原典 (The Evolution of LeanStore, BTW 2023)
-* 区切りキーを「短く」選ぶのが良いのか、「隣と接頭辞を共有させる」のが良いのか。論文も未検討だと書いている
-* SDL の scan で起きる分岐ミスを SIMD で減らせるか (論文では今後の課題)
+* [background.md](background.md): 論文で引き合いに出されるアルゴリズムを、学部レベルの前提から順に解説 (B-Tree の基本、キー正規化、ART / HOT / Wormhole、LeanStore / vmcache / OLC など)
+* [deep-dive.md](deep-dive.md): 読後の疑問5つの調査結果
+  * Key normalization の具体的なやり方
+  * OLC と vmcache の仕組み
+  * hints の原典と実装
+  * 区切りキーは短くすべきか、接頭辞を共有させるべきか (論文は未検討。実装の挙動と自分の考察)
+  * SDL の scan を SIMD で速くできるか (論文では今後の課題。実装の比較と自分の案)

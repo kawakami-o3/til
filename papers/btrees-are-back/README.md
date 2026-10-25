@@ -204,6 +204,7 @@ FDL の split が独特:
 ## 関連ノート
 
 * [background.md](background.md): 論文で引き合いに出されるアルゴリズムを、学部レベルの前提から順に解説 (B-Tree の基本、キー正規化、ART / HOT / Wormhole、LeanStore / vmcache / OLC など)
+* [impl/](impl/README.md): background.md の全項目を、自分で実装できる粒度まで書き下した資料 (解説と Rust 風の擬似コード)
 * [deep-dive.md](deep-dive.md): 読後の疑問5つの調査結果
   * Key normalization の具体的なやり方
   * OLC と vmcache の仕組み
